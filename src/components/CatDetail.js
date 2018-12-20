@@ -20,6 +20,7 @@ class CatDetail extends Component
       this.setState({click: true});
       this.setState({icon: "fas fa-star"});
       const data = {
+        id: this.props.id,
         fact: this.props.fact,
         url: this.props.url
       };

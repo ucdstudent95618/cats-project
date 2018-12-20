@@ -15,6 +15,7 @@ class CatList extends Component {
 
   state = {
     cats: [],
+    temp: [],
     fav: [],
     singleView: false,
     favView: false
@@ -72,7 +73,7 @@ class CatList extends Component {
 
   headerCallback = (data) => {
      /* sort cards by last letter in fact */
-
+    console.log(data);
     if (data === "sort"){
       const newArr = [...this.state.cats];
 
@@ -97,8 +98,22 @@ class CatList extends Component {
 
     }
     if (data === "favorites"){
-      console.log("favorites");
+      /* render favorites */ 
+      if (this.state.fav.length < 1) {
+        alert("You don't have any favorites!");
+      } else {
+        const temp = this.state.cats;
+        this.setState({temp});
+        this.setState({cats: this.state.fav});
+      }
+
     }
+    if (data === "home" && this.state.temp.length > 0) {
+      const temp = this.state.temp;
+      this.setState({cats: temp});
+      this.setState({temp: [] });
+    }
+    
   }
 
 

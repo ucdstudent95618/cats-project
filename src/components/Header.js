@@ -11,6 +11,10 @@ class Header extends Component {
     this.props.callbackfunctionParent("sort");
   }
 
+  goToHome = () => {
+    this.props.callbackfunctionParent("home");
+  }
+
   render () {
     return (
       <div className="header">
@@ -20,6 +24,9 @@ class Header extends Component {
           </div>
           <div className="wrapper">
             <button onClick={this.goToFavorites} type="button"> Favorites </button>
+          </div>
+          <div className="wrapper">
+            <button onClick={this.goToHome} type="button"> Home </button>
           </div>
         </div>
         
