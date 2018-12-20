@@ -4,6 +4,7 @@ import Masonry from 'react-masonry-component';
 import convert from 'xml-js';
 
 import CatDetail from './CatDetail';
+import Header from './Header';
 
 const masonryOptions = {
   transitionDuration: 0
@@ -13,9 +14,10 @@ const masonryOptions = {
 class CatList extends Component {
 
   state = {
-    cats: [ ],
-    facts: [ ],
-    fav: [ ]
+    cats: [],
+    fav: [],
+    singleView: false,
+    favView: false
   }
 
 
@@ -30,48 +32,109 @@ class CatList extends Component {
       /* cat response */
       const js_xml = convert.xml2js(catRes.data, {compact: true, spaces: 4});
 
-      this.setState({ cats: js_xml.response.data.images.image });
+      const catData = js_xml.response.data.images.image;
+      //this.setState({ c: catData });
 
       /* fact response */
-      const factData = factRes.data;
+      const factData = factRes.data.data;
+      
 
-      this.setState({ facts: factData.data });
+      const arr = [];
+       for ( var i = 0; i < catData.length; i++) {
+          const obj = {
+            id: catData[i].id._text,
+            url: catData[i].url._text,
+            fact: factData[i].fact
+          }
+          arr.push(obj);
+       }
+
+      this.setState({ cats: arr }, function() {
+        console.log(this.state.cats);
+      });
     }));
+  }
+
+  favoritesCallback = (data) => {
+    const arr = [...this.state.fav, data]
+
+
+    this.setState({fav: arr}, function() {
+      console.log(this.state.fav);
+    });
+  }
+
+  singleView = (data) => {
 
   }
 
-  myCallback = (data) => {
-    this.setState({fav: data});
-  }
+  /* callback function from header */
 
-  renderList() {
-    // eslint-disable-next-line
-    const { cats, facts } = this.state;
+  headerCallback = (data) => {
+     /* sort cards by last letter in fact */
 
-    if (facts.length > 0)
-    { 
-      return cats.map((cat,index) => 
-        <CatDetail 
-        key={cat.id._text} 
-        id={cat.id._text} 
-        url={cat.url._text}  
-        fact={facts[index].fact}
-        callbackFromParent={this.myCallback} />
-      )
+    if (data === "sort"){
+      const newArr = [...this.state.cats];
+
+      newArr.sort(function (a, b){
+        /* get last word a */
+        const split_a = a.fact.split(" ");
+        const a_word = split_a[split_a.length - 1].toLowerCase();
+        /* get last word b */
+        const split_b = b.fact.split(" ");
+        const b_word = split_b[split_b.length - 1].toLowerCase();
+        
+        if (a_word < b_word) 
+          return -1;
+        if (a_word > b_word)
+          return 1;
+        
+        return 0;
+      })
+
+      console.log(newArr);
+      this.setState({cats: newArr});
+
+    }
+    if (data === "favorites"){
+      console.log("favorites");
     }
   }
 
 
+
+  renderList() {
+    // eslint-disable-next-line
+    const { cats } = this.state;
+
+    if (cats.length > 0)
+    {
+      
+      return cats.map((cat,index) => 
+        <CatDetail 
+        key={cat.id} 
+        id={cat.id} 
+        url={cat.url}  
+        fact={cat.fact}
+        favorites={this.favoritesCallback} 
+        singleView={this.singleView}/>
+      )
+    }
+  }
+
   render() {
     return (
-      <Masonry
-        options={masonryOptions} 
-        disableImagesLoaded={false} 
-        updateOnEachImageLoad={false} 
-      >
-        {this.renderList()}
-      </Masonry>
-
+      <div>
+        <Header callbackfunctionParent={this.headerCallback}/>
+          <Masonry
+          options={masonryOptions} 
+          disableImagesLoaded={false} 
+          updateOnEachImageLoad={false} 
+          >
+          {this.renderList()}
+        </Masonry>
+      </div>
+      
     );
   }
 

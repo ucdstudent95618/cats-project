@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import '../styles/Header.css';
-import { Link } from 'react-router-dom';
 
 class Header extends Component {
 
@@ -10,9 +9,6 @@ class Header extends Component {
   }
   sort = () => {
     this.props.callbackfunctionParent("sort");
-  }
-  home = () => {
-    this.props.callbackfunctionParent("home");
   }
 
   render () {
@@ -23,12 +19,7 @@ class Header extends Component {
             <button onClick={this.sort} type="button"> Sort </button> 
           </div>
           <div className="wrapper">
-            <Link to={`/f/`}> Favorites </Link>
-            {/*<button onClick={this.goToFavorites} type="button"> Favorites </button>*/}
-          </div>
-          <div className="wrapper">
-          <Link to={`/`}> Home </Link>
-            {/*<button onClick={this.home} type="button"> Home </button> */}
+            <button onClick={this.goToFavorites} type="button"> Favorites </button>
           </div>
         </div>
         

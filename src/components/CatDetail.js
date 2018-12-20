@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Card from './Card';
 import Section from './Section';
 
-import { Link } from 'react-router-dom';
 
 class CatDetail extends Component 
 {
@@ -24,7 +23,7 @@ class CatDetail extends Component
         fact: this.props.fact,
         url: this.props.url
       };
-      this.props.callbackFromParent(data);
+      this.props.favorites(data);
     } 
   }
 
@@ -38,7 +37,6 @@ class CatDetail extends Component
           <img src={this.props.url} alt="Cat" />
         </Section> 
         <Section>
-          <Link to={`/p/${this.props.id}`}> View </Link>
           <button onClick={this.handleClick} style={{float: "left"}}> View </button>
           <button onClick={this.favorite} style={{float: "right"}}><i className={this.state.icon}></i></button>
         </Section>
