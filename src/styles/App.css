@@ -1,0 +1,30 @@
+h3 {
+  padding: 10px;
+}
+
+img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.container {
+  margin: 0 auto;
+  padding-top: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.Card {
+  width: 236px;
+  background-color: #f9f9f9;
+  padding: 0px 10px 10px 10px;
+  margin: 4px;
+  border-radius: 10px;
+}
+.Card:hover {
+  background-color: #b8b8b8;
+}
+
+.pin-text {
+  padding: 10px 5px 20px 5px;
+}
