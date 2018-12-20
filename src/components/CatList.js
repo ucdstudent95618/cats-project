@@ -12,15 +12,12 @@ const masonryOptions = {
 
 class CatList extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      cats: [],
-      facts: [],
-      fav: []
-    }
+  state = {
+    cats: [ ],
+    facts: [ ],
+    fav: [ ]
   }
+
 
   componentWillMount() {
 
@@ -33,17 +30,12 @@ class CatList extends Component {
       /* cat response */
       const js_xml = convert.xml2js(catRes.data, {compact: true, spaces: 4});
 
-      this.setState({ cats: js_xml.response.data.images.image }, function (){
-        console.log(this.state.cats);
-      });
+      this.setState({ cats: js_xml.response.data.images.image });
 
       /* fact response */
       const factData = factRes.data;
 
-      this.setState({ facts: factData.data }, function () {
-        console.log("this");
-        console.log(this.state.facts);
-      });
+      this.setState({ facts: factData.data });
     }));
 
   }
@@ -52,17 +44,21 @@ class CatList extends Component {
     this.setState({fav: data});
   }
 
-
-
   renderList() {
     // eslint-disable-next-line
     const { cats, facts } = this.state;
 
-
-
-    return cats.map( (cat,index) => 
-      <CatDetail key={cat.id._text} id={cat.id._text} url={cat.url._text} fact={facts[index]}  callbackFromParent={this.myCallback} />
-    )
+    if (facts.length > 0)
+    { 
+      return cats.map((cat,index) => 
+        <CatDetail 
+        key={cat.id._text} 
+        id={cat.id._text} 
+        url={cat.url._text}  
+        fact={facts[index].fact}
+        callbackFromParent={this.myCallback} />
+      )
+    }
   }
 
 
