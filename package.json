@@ -8,7 +8,6 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-masonry-component": "^6.2.1",
-    "react-router-dom": "^4.4.0-beta.6",
     "react-scripts": "2.1.1",
     "xml-js": "^1.6.8"
   },
