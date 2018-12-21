@@ -43,7 +43,8 @@ class CatList extends Component {
           const obj = {
             id: catData[i].id._text,
             url: catData[i].url._text,
-            fact: factData[i].fact
+            fact: factData[i].fact,
+            fav: false
           }
           arr.push(obj);
        }
@@ -53,8 +54,17 @@ class CatList extends Component {
   }
 
   favoritesCallback = (data) => {
+    const { cats } = this.state;
     const arr = [...this.state.fav, data]
+    const newArr = cats;
 
+    for (var i = 0; i < cats.length; i++){
+      if (data.id === newArr[i].id)
+          newArr[i] = data;
+    }
+    this.setState({cats: newArr}, function(){
+      console.log(cats);
+    });
 
     this.setState({fav: arr});
   }
@@ -143,6 +153,7 @@ class CatList extends Component {
         id={cat.id} 
         url={cat.url}  
         fact={cat.fact}
+        fav={cat.fav}
         favorites={this.favoritesCallback} 
         singleView={this.singleView}/>
       )
