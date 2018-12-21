@@ -17,8 +17,7 @@ class CatList extends Component {
     cats: [],
     temp: [],
     fav: [],
-    singleView: false,
-    favView: false
+    fView: false
   }
 
 
@@ -34,7 +33,6 @@ class CatList extends Component {
       const js_xml = convert.xml2js(catRes.data, {compact: true, spaces: 4});
 
       const catData = js_xml.response.data.images.image;
-      //this.setState({ c: catData });
 
       /* fact response */
       const factData = factRes.data.data;
@@ -50,9 +48,7 @@ class CatList extends Component {
           arr.push(obj);
        }
 
-      this.setState({ cats: arr }, function() {
-        console.log(this.state.cats);
-      });
+      this.setState({ cats: arr });
     }));
   }
 
@@ -60,13 +56,23 @@ class CatList extends Component {
     const arr = [...this.state.fav, data]
 
 
-    this.setState({fav: arr}, function() {
-      console.log(this.state.fav);
-    });
+    this.setState({fav: arr});
   }
 
   singleView = (data) => {
-
+    /* not from favs view */
+    if (this.state.cats.length > 1 && !this.state.fView) {
+      const arr = [data];
+      const temp = this.state.cats;
+      this.setState({temp});
+      this.setState({cats: arr});
+    }
+    /* from favs view */
+    if (this.state.cats.length > 1 && this.state.fView) {
+      const arr = [data];
+      this.setState({cats: arr});
+      this.setState({fView: false});
+    }
   }
 
   /* callback function from header */
@@ -92,26 +98,33 @@ class CatList extends Component {
         
         return 0;
       })
-
-      console.log(newArr);
       this.setState({cats: newArr});
 
     }
     if (data === "favorites"){
       /* render favorites */ 
-      if (this.state.fav.length < 1) {
+      if (this.state.fav.length < 1 ) {
         alert("You don't have any favorites!");
-      } else {
+      } 
+      if (this.state.fav.length >= 1 && this.state.cats.length > 1) {
         const temp = this.state.cats;
         this.setState({temp});
         this.setState({cats: this.state.fav});
+        this.setState({fView: true});
+      } 
+      if (this.state.fav.length >=1 && this.state.cats.length === 1) {
+        this.setState({cats: this.state.fav});
+        this.setState({fView: true});
       }
 
     }
     if (data === "home" && this.state.temp.length > 0) {
+      /* check if we are on favorites */
+      if (this.state.fView) {
+        this.setState({fView: false});
+      }
       const temp = this.state.temp;
       this.setState({cats: temp});
-      this.setState({temp: [] });
     }
     
   }
@@ -119,7 +132,6 @@ class CatList extends Component {
 
 
   renderList() {
-    // eslint-disable-next-line
     const { cats } = this.state;
 
     if (cats.length > 0)

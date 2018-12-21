@@ -12,7 +12,12 @@ class CatDetail extends Component
   }
   
   handleClick = () => {
-    console.log("it has been clicked");
+    const data = {
+      id: this.props.id,
+      fact: this.props.fact,
+      url: this.props.url
+    };
+    this.props.singleView(data);
   }
   favorite = () => {
 
