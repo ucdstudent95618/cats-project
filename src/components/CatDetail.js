@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Card from './Card';
-import Section from './Section';
+// import Section from './Section';
 
 
 class CatDetail extends Component 
@@ -32,13 +32,13 @@ class CatDetail extends Component
   render() {
     return (
       <Card>
-        <Section name="pin-text">
+        <div className="pin-text">
           {this.props.fact}
-        </Section>
-        <Section name="pin-image">
+        </div>
+        <div className="pin-image">
           <img src={this.props.url} alt="Cat" />
-        </Section> 
-        <Section>
+        </div> 
+        <div>
           <button onClick={this.handleClick} style={{float: "left"}}> View </button>
           <button onClick={this.favorite} style={{float: "right"}}>
             {this.props.fav ?
@@ -47,7 +47,7 @@ class CatDetail extends Component
               <i className="far fa-star"></i>
             }
           </button>
-        </Section>
+        </div>
       </Card>
     );
   }

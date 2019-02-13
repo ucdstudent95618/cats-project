@@ -6,6 +6,7 @@ import convert from 'xml-js';
 import CatDetail from './CatDetail';
 import Header from './Header';
 
+
 const masonryOptions = {
   transitionDuration: 0
 };
@@ -163,16 +164,16 @@ class CatList extends Component {
   render() {
     return (
       <div>
-        <Header callbackfunctionParent={this.headerCallback}/>
-          <Masonry
-          options={masonryOptions} 
-          disableImagesLoaded={false} 
-          updateOnEachImageLoad={false} 
-          >
-          {this.renderList()}
-        </Masonry>
+          <Header callbackfunctionParent={this.headerCallback}/>
+              <Masonry
+                className={'row'}
+                options={masonryOptions} 
+                disableImagesLoaded={false} 
+                updateOnEachImageLoad={false} 
+                >
+                {this.renderList()}
+              </Masonry>
       </div>
-      
     );
   }
 

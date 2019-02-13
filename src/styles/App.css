@@ -3,7 +3,7 @@ h3 {
 }
 
 img {
-  width: 100%;
+  width: 236px;
   border-radius: 10px;
 }
 
@@ -15,7 +15,6 @@ img {
 }
 
 .Card {
-  width: 236px;
   background-color: #f9f9f9;
   padding: 0px 10px 10px 10px;
   margin: 4px;
