@@ -1,13 +1,13 @@
 {
-  "main.css": "/cats-project/static/css/main.1452e043.chunk.css",
-  "main.js": "/cats-project/static/js/main.062b2d06.chunk.js",
-  "main.js.map": "/cats-project/static/js/main.062b2d06.chunk.js.map",
+  "main.css": "/cats-project/static/css/main.62e7f715.chunk.css",
+  "main.js": "/cats-project/static/js/main.9f414ea1.chunk.js",
+  "main.js.map": "/cats-project/static/js/main.9f414ea1.chunk.js.map",
   "static/js/1.2bafb041.chunk.js": "/cats-project/static/js/1.2bafb041.chunk.js",
   "static/js/1.2bafb041.chunk.js.map": "/cats-project/static/js/1.2bafb041.chunk.js.map",
   "runtime~main.js": "/cats-project/static/js/runtime~main.89664fea.js",
   "runtime~main.js.map": "/cats-project/static/js/runtime~main.89664fea.js.map",
-  "static/css/main.1452e043.chunk.css.map": "/cats-project/static/css/main.1452e043.chunk.css.map",
+  "static/css/main.62e7f715.chunk.css.map": "/cats-project/static/css/main.62e7f715.chunk.css.map",
   "index.html": "/cats-project/index.html",
-  "precache-manifest.9e030290c235b3c9478bc9a0c8f0306a.js": "/cats-project/precache-manifest.9e030290c235b3c9478bc9a0c8f0306a.js",
+  "precache-manifest.654bda75bc47d43bec4482c785b2963d.js": "/cats-project/precache-manifest.654bda75bc47d43bec4482c785b2963d.js",
   "service-worker.js": "/cats-project/service-worker.js"
 }
